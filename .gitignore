@@ -1,5 +1,5 @@
 # credentials
-/src/constant.ts
+/src/constants.ts
 
 # compiled output
 /dist
