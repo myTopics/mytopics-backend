@@ -16,7 +16,7 @@ export class ElenaService {
           encoding: 'utf8',
         },
       );
-      console.log('Process finished.');
+      console.log('Process finished. #');
       console.log('stdout: ', child.stdout);
       console.log('stderr: ', child.stderr);
       console.log('exist code: ', child.status);
