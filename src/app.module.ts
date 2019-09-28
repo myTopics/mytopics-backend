@@ -3,16 +3,16 @@ import { ArticlesModule } from './articles/articles.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AggregatorModule } from './aggregator/aggregator.module';
-import { ElenaService } from './elena/elena.service';
-import { ElenaModule } from './elena/elena.module';
+import { ProcessorService } from './processor/processor.service';
+import { ProcessorModule } from './processor/processor.module';
 
 @Module({
   imports: [
     ArticlesModule,
     AggregatorModule,
-    ElenaModule,
+    ProcessorModule,
   ],
   controllers: [AppController],
-  providers: [AppService, ElenaService],
+  providers: [AppService, ProcessorService],
 })
 export class AppModule {}

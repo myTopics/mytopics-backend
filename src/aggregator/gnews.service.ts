@@ -23,7 +23,7 @@ export class GnewsService {
     });
   }
   toArticle(article): Article {
-    return {
+    const art = {
       id: this.getHashCode(article.title).toString(),
       author: article.author,
       source: article.url,
@@ -36,16 +36,20 @@ export class GnewsService {
       decisions: null,
       sentiment: null,
     };
+    if (art.id && art.title && art.text && art.summary) {
+      return art;
+    }
+    return null;
   }
   getHashCode(str: string): number {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
-        const character = str.charCodeAt(i);
-        // tslint:disable-next-line:no-bitwise
-        hash = ((hash << 5) - hash) + character;
-        // tslint:disable-next-line:no-bitwise
-        hash = hash & hash; // Convert to 32bit integer
+      const character = str.charCodeAt(i);
+      // tslint:disable-next-line:no-bitwise
+      hash = (hash << 5) - hash + character;
+      // tslint:disable-next-line:no-bitwise
+      hash = hash & hash; // Convert to 32bit integer
     }
     return hash;
-}
+  }
 }
