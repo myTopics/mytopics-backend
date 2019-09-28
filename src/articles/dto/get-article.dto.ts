@@ -1,4 +1,4 @@
-import { IsString } from 'class-validator';
+import { IsString, IsArray } from 'class-validator';
 
 export class Article {
     @IsString()
@@ -9,4 +9,6 @@ export class Article {
     readonly image: string;
     @IsString()
     readonly text: string;
+    @IsArray()
+    readonly tags: string[];
 }
