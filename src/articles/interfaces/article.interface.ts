@@ -3,5 +3,5 @@ export interface Article {
     readonly summary: string;
     readonly image: string;
     readonly text: string;
-    readonly tags: string[]; // TODO not in schema? Or in schema?
+    readonly tags: string[];
 }
