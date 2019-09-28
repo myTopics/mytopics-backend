@@ -10,11 +10,9 @@ export class GnewsService {
     this.newsapi = new NewsAPI('fa67798007d44de282aafd702bdc4ce5');
   }
 
-  findAll(): Article[] {
-    const raw = this.newsapi.v2.topHeadlines({
+  async findAll(): Promise<object> {
+    return this.newsapi.v2.topHeadlines({
       language: 'en',
     });
-
-    return [];
   }
 }

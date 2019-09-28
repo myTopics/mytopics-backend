@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Article } from '../../articles/interfaces/article.interface';
+import { Article } from '../articles/interfaces/article.interface';
 
 @Injectable()
 export class MocknewsService {
@@ -19,6 +19,8 @@ export class MocknewsService {
         { title: 'bitcoin', occurrence: 10 },
         { title: 'music', occurrence: 5 },
       ],
+      sentiment: null,
+      author: null,
       decisions: [{ link: 'https://woodstock.org', title: 'Woodstock home' }],
     },
     {
@@ -37,6 +39,8 @@ export class MocknewsService {
         { title: 'bitcoin', occurrence: 10 },
         { title: 'centos', occurrence: 5 },
       ],
+      sentiment: null,
+      author: null,
       decisions: [
         { link: 'https://centos.org', title: 'CentOS home' },
         { link: 'https://bitcoin.org', title: 'Bitcoin home' },
@@ -57,6 +61,8 @@ export class MocknewsService {
         { title: 'bitcoin', occurrence: 10 },
         { title: 'satoshi', occurrence: 5 },
       ],
+      sentiment: null,
+      author: null,
       decisions: [
         { link: 'https://satoshi.org', title: 'Satoshi home' },
         { link: 'https://bitcoin.org', title: 'Bitcoin home' },

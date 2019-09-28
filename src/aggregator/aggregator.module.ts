@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { MocknewsService } from './mocknews.service';
+import { GnewsService } from './gnews.service';
 
 @Module({
-  providers: [MocknewsService],
+  providers: [MocknewsService, GnewsService],
   controllers: [],
-  exports: [MocknewsService],
+  exports: [MocknewsService, GnewsService],
 })
 export class AggregatorModule {}
