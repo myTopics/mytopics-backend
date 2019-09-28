@@ -16,7 +16,7 @@ export class ArticlesController {
 
     @Get()
     async getAll(): Promise<Article[]> {
-      return this.elenaService.process(await this.articleService.findAll());
+      return this.elenaService.process(await this.articleService.findAll()); // todo await?
     }
 
     @Get(':topic')
