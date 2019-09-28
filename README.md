@@ -35,6 +35,8 @@ for microsoft text analytics API:
 pip install --upgrade azure-cognitiveservices-language-textanalytics
 ```
 
+for nest, create src/constants.ts which exports const DB_PROVIDER which should be a mongodb connection string.
+
 ## Running the app
 
 ```bash

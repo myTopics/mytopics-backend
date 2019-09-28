@@ -1,25 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import { Article } from './interfaces/article.interface';
+import { GnewsService } from '../aggregator/gnews.service';
 
 @Injectable()
 export class ArticlesService {
-  private readonly articles: Article[] = [];
+  constructor(private readonly newsService: GnewsService) {}
 
-  findAll(): Article[] {
-    return this.articles;
+  async findAll(): Promise<Article[]> {
+    const json = await this.newsService.findAll();
+    // tslint:disable-next-line:no-string-literal
+    return json['articles'].map(article => this.newsService.toArticle(article));
   }
 
-  findById(articleId: string): Article {
-      // TODO schema instead of article?
-    return this.articles.find(article => article.id === articleId);
+  async findById(articleId: string): Promise<Article> {
+    articleId = articleId.toString();
+    return (await this.findAll()).find(article => article.id === articleId);
   }
 
-  findByTopic(topicId: string): Article[] {
-    return this.articles;
+  async findByTopic(topicId: string): Promise<Article[]> {
+    return this.findAll();
   }
 
-  findByAnyTags(tags: string[]): Article[] {
-    return this.articles.map(article => {
+  async findByAnyTags(tags: string[]): Promise<Article[]> {
+    return (await this.findAll()).map(article => {
       if (
         tags.map(tag => {
           return true; // TODO
@@ -31,9 +34,9 @@ export class ArticlesService {
     });
   }
 
-  findByAllTags(tags: string[]): Article[] {
+  async findByAllTags(tags: string[]): Promise<Article[]> {
     // connect to db? query db?
-    return this.articles.map(article => {
+    return (await this.findAll()).map(article => {
       if (
         tags.map(tag => {
           return true; // TODO
