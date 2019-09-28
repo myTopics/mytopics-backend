@@ -3,5 +3,5 @@ export interface Article {
     readonly summary: string;
     readonly image: string;
     readonly text: string;
-    readonly tags: string[];
+    readonly tags: Map<string, number>;
 }
