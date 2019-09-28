@@ -26,31 +26,32 @@ def detect_language(text_analytics, document):
         document[0]['language'] = 'en'
     
 def get_tags(text_analytics, document):
-    if not document[0].has_key('language'):
+    if 0 in document and not document[0].has_key('language'):
         detect_language(text_analytics, document)
 
     response = text_analytics.entities(documents=document)
     tags = []
-    for entity in response.documents[0].entities:
-        tag = dict()
-        tag['NAME'] = entity.name
-        tag['Type'] = entity.type
-        if tag['Type'] == u'DateTime' or tag['Type'] == u'Other':
-            continue
+    if 0 in response.documents:
+        for entity in response.documents[0].entities:
+            tag = dict()
+            tag['NAME'] = entity.name
+            tag['Type'] = entity.type
+            if tag['Type'] == u'DateTime' or tag['Type'] == u'Other':
+                continue
 
-        tag['Sub-type'] = entity.sub_type
-        matches = []
-        for match in entity.matches:
-            match_dict = dict()
-            match_dict['Offset'] = match.offset
-            match_dict['Length'] = match.length
-            match_dict['Score'] = match.entity_type_score
-            matches.append(match_dict)
-        tags.append(tag)
-    document[0]['tags'] = tags
+            tag['Sub-type'] = entity.sub_type
+            matches = []
+            for match in entity.matches:
+                match_dict = dict()
+                match_dict['Offset'] = match.offset
+                match_dict['Length'] = match.length
+                match_dict['Score'] = match.entity_type_score
+                matches.append(match_dict)
+            tags.append(tag)
+        document[0]['tags'] = tags
 
 def get_sentiment(text_analytics, document):
-    if not document[0].has_key('language'):
+    if 0 in document and not document[0].has_key('language'):
         detect_language(text_analytics, document)
 
     response = text_analytics.sentiment(documents=document)
@@ -73,19 +74,15 @@ def main(documents):
     get_tags(text_analytics, documents)
     get_sentiment(text_analytics, documents)
     
-    print json.dumps(document)
+    print(json.dumps(document))
     sys.stdout.flush()
 
 if __name__ == "__main__":
     os.environ["TEXT_ANALYTICS_SUBSCRIPTION_KEY"] = '70cc9edd41284fbeae3d022a83353937'
     os.environ["TEXT_ANALYTICS_ENDPOINT"] = 'https://ilana.cognitiveservices.azure.com/'
     if len(sys.argv) < 2:
-        print "article json is missing"
-        document = [
-            {
-                'id': '1',
-                "text": "Microsoft was founded by Bill Gates and Paul Allen on April 4, 1975, to develop and sell BASIC interpreters for the Altair 8800."        }
-        ]
+        print("article json is missing")
+    # document = json.loads('[{"id":"1626045727","author":"Tovah Lazaroff","source":"https://www.jpost.com/Arab-Israeli-Conflict/IDF-disperses-Palestinian-protest-againt-Israeli-annexation-plans-603221","summary":"At one point during the demonstration, some of the activists went up to the roof and stood on the edge, waving Palestinian flags.","title":"IDF disperses Palestinian protest against Israeli annexation plans","image":"https://images.jpost.com/image/upload/f_auto,fl_lossy/t_Article2016_ControlFaceDetect/446180","date":"2019-09-28T22:26:00.000Z","text":"The IDF on Saturday dispersed a Palestinian protest against Israeli plans to annex the Jordan Valley and the Megilot region of the Dead Sea.\\r\\nvar cont = `Join Jerusalem Post Premium Plus now for just $5 and upgrade your experience with an ads-free website and… [+123 chars]","tags":null,"decisions":null,"sentiment":null}]')
     else:
-        document = json.load(sys.argv[1])
+        document = json.loads(sys.argv[1])
     main(document)
