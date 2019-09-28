@@ -5,6 +5,6 @@ import { DecisionsController } from './decisions.controller';
 @Module({
   providers: [DecisionsService],
   controllers: [DecisionsController],
-  exports: [DecisionsService, DecisionsController],
+  exports: [DecisionsService],
 })
 export class DecisionsModule {}

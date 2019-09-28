@@ -14,7 +14,6 @@ export class GnewsService {
     const raw = this.newsapi.v2.topHeadlines({
       language: 'en',
     });
-    console.dir(raw);
 
     return [];
   }

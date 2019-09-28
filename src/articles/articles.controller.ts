@@ -1,6 +1,7 @@
 import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
 import { ArticlesService } from './articles.service';
 import { Article } from './interfaces/article.interface';
+import { Decision } from './interfaces/decision.interface';
 
 @Controller('articles')
 export class ArticlesController {
