@@ -3,27 +3,29 @@ import { Article } from 'src/articles/interfaces/article.interface';
 
 @Injectable()
 export class ElenaService {
-  async process(articles: Article[]): Promise<Article[]> {
+  process(articles: Article[]): Article[] {
+    const child_process = require('child_process');
     const promisses = [];
+    const newArticles = [];
     articles.forEach(article => {
       const input = JSON.stringify(article);
-      console.dir(input);
-      const process = require('child_process').execScript('python', ['src/articles/news.py', input]);
-      promisses.push(
-        new Promise<Article[]>((resolve, reject) => {
-          process.stdout.on('data', data => {
-            console.log('python success');
-            console.log(data.toString());
-            resolve(JSON.parse(data.toString()));
-          });
-          process.stderr.on('data', data => {
-            console.log('python failed');
-            console.log(data.toString());
-            reject(JSON.parse(data.toString()));
-          });
-        }),
+      const child = child_process.spawnSync(
+        'python',
+        ['src/articles/news.py'],
+        {
+          encoding: 'utf8',
+        },
       );
+      console.log('Process finished.');
+      console.log('stdout: ', child.stdout);
+      console.log('stderr: ', child.stderr);
+      console.log('exist code: ', child.status);
+      if (child.error) {
+        console.log('ERROR: ', child.error);
+      } else {
+        articles.push(JSON.parse(child.stdout));
+      }
     });
-    return Promise.all<Article>(promisses);
+    return newArticles;
   }
 }
