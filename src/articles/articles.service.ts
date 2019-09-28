@@ -9,6 +9,11 @@ export class ArticlesService {
     return this.articles;
   }
 
+  findById(articleId: string): Article {
+      // TODO schema instead of article?
+    return this.articles.find(article => article.id === articleId);
+  }
+
   findByTopic(topicId: string): Article[] {
     return this.articles;
   }
@@ -17,8 +22,8 @@ export class ArticlesService {
     return this.articles.map(article => {
       if (
         tags.map(tag => {
-            return true; //TODO
-        //   return article.tags.keys().(tag);
+          return true; // TODO
+          //   return article.tags.keys().(tag);
         }).length > 0
       ) {
         return article;
@@ -31,7 +36,8 @@ export class ArticlesService {
     return this.articles.map(article => {
       if (
         tags.map(tag => {
-          return article.tags.includes(tag);
+          return true; // TODO
+          //   return article.tags.includes(tag);
         }).length === tags.length
       ) {
         return article;
