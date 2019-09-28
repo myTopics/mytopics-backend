@@ -17,13 +17,13 @@ export class ElenaService {
         new Promise<Article[]>((resolve, reject) => {
           process.stdout.on('data', data => {
             console.log('python success');
-            console.log(data);
-            resolve(JSON.parse(data));
+            console.log(data.toString());
+            resolve(JSON.parse(data.toString()));
           });
           process.stderr.on('data', data => {
               console.log('python failed');
-              console.log(data);
-            reject(JSON.parse(data));
+              console.log(data.toString());
+            reject(JSON.parse(data.toString()));
           });
         }),
       );
