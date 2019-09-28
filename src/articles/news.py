@@ -2,6 +2,7 @@ import os
 import json
 from azure.cognitiveservices.language.textanalytics import TextAnalyticsClient
 from msrest.authentication import CognitiveServicesCredentials
+import sys
 
 def get_weighted_data(article_id, json_article, tags_list, max_tags=None):
     tags = dict()
@@ -56,7 +57,7 @@ def get_sentiment(text_analytics, document):
     document[0]['sentiment score'] = response.documents[0].score
     
 
-def main(document):
+def main(documents):
     key_var_name = 'TEXT_ANALYTICS_SUBSCRIPTION_KEY'
     if not key_var_name in os.environ:
         raise Exception('Please set/export the environment variable: {}'.format(key_var_name))
@@ -69,10 +70,11 @@ def main(document):
 
     credentials = CognitiveServicesCredentials(subscription_key)
     text_analytics = TextAnalyticsClient(endpoint=endpoint, credentials=credentials)
-    get_tags(text_analytics, document)
-    get_sentiment(text_analytics, document)
-    del document[0]['text']
+    get_tags(text_analytics, documents)
+    get_sentiment(text_analytics, documents)
+    
     print json.dumps(document)
+    sys.stdout.flush()
 
 if __name__ == "__main__":
     os.environ["TEXT_ANALYTICS_SUBSCRIPTION_KEY"] = '70cc9edd41284fbeae3d022a83353937'
