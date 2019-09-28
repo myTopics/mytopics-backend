@@ -79,9 +79,13 @@ def main(documents):
 if __name__ == "__main__":
     os.environ["TEXT_ANALYTICS_SUBSCRIPTION_KEY"] = '70cc9edd41284fbeae3d022a83353937'
     os.environ["TEXT_ANALYTICS_ENDPOINT"] = 'https://ilana.cognitiveservices.azure.com/'
-    document = [
-        {
-            'id': '1',
-            "text": "Microsoft was founded by Bill Gates and Paul Allen on April 4, 1975, to develop and sell BASIC interpreters for the Altair 8800."        }
-    ]
+    if len(sys.argv) < 2:
+        print "article json is missing"
+        document = [
+            {
+                'id': '1',
+                "text": "Microsoft was founded by Bill Gates and Paul Allen on April 4, 1975, to develop and sell BASIC interpreters for the Altair 8800."        }
+        ]
+    else:
+        document = json.load(sys.argv[1])
     main(document)
