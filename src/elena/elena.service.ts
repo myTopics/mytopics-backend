@@ -11,7 +11,7 @@ export class ElenaService {
       const input = JSON.stringify(article);
       const child = child_process.spawnSync(
         'python',
-        ['src/articles/news.py'],
+        ['src/articles/news.py', input],
         {
           encoding: 'utf8',
         },
