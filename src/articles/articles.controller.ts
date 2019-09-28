@@ -9,18 +9,18 @@ export class ArticlesController {
                 private readonly elenaService: ElenaService) {}
 
     @Get('article/:id')
-    getById(@Param('id', new ParseIntPipe()) id): Article {
+    async getById(@Param('id', new ParseIntPipe()) id): Promise<Article> {
         const article = this.articleService.findById(id);
         return article;
     }
 
     @Get()
-    getAll(): Article[] {
-      return this.elenaService.process(this.articleService.findAll());
+    async getAll(): Promise<Article[]> {
+      return this.elenaService.process(await this.articleService.findAll());
     }
 
     @Get(':topic')
-    getByTopic(@Param() params): Article[] {
+    async getByTopic(@Param() params): Promise<Article[]> {
       return this.articleService.findByTopic(params.topic);
     }
 }

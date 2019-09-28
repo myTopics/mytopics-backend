@@ -4,10 +4,13 @@ import { Article } from './articles/interfaces/article.interface';
 
 @Injectable()
 export class AppService {
-  constructor(private readonly gnewsService: GnewsService) {}
-  getHello(): Article[] {
-    const json = this.gnewsService.findAll();
-
-    return [];
+  id: number;
+  constructor(private readonly gnewsService: GnewsService) {
+    this.id = 0;
+  }
+  async getHello(): Promise<object> {
+    // tslint:disable
+    const json = await this.gnewsService.findAll();
+    return json;
   }
 }
