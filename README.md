@@ -30,8 +30,9 @@
 
 ## Installation
 
+for microsoft text analytics API:
 ```bash
-$ npm install
+pip install --upgrade azure-cognitiveservices-language-textanalytics
 ```
 
 ## Running the app
