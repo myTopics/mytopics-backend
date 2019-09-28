@@ -17,7 +17,8 @@ export class ArticlesService {
     return this.articles.map(article => {
       if (
         tags.map(tag => {
-          return article.tags.includes(tag);
+            return true; //TODO
+        //   return article.tags.keys().(tag);
         }).length > 0
       ) {
         return article;
