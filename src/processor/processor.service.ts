@@ -7,6 +7,7 @@ export class ProcessorService {
   process(articles: Article[]): Article[] {
     const childProcess = require('child_process');
     const newArticles = [];
+    console.dir(articles);
     articles.forEach(article => {
       if (article) {
         const input = JSON.stringify({
@@ -33,6 +34,7 @@ export class ProcessorService {
           console.log('ERROR: ', child.error);
         } else if (child.stdout) {
           const result = JSON.parse(child.stdout);
+          console.dir(result);
           const calcTags = [];
           result.tags.forEach(tag => {
             calcTags.push({ title: tag.title, occurrence: Math.random() });
