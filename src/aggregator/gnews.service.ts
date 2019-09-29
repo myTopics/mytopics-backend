@@ -34,7 +34,7 @@ export class GnewsService {
       date: new Date(article.publishedAt),
       text: striptags(article.content),
       tags: null,
-      decisions: null,
+      decisions: [],
       sentiment: null,
     };
   }

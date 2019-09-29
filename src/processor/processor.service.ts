@@ -46,10 +46,10 @@ export class ProcessorService {
   processDecisions(articles: Article[]): Article[] {
     articles.forEach(article => {
       articles.forEach(articleCompare => {
-        if (article !== articleCompare) {
+        if (article !== articleCompare && article.tags && articleCompare.tags && article.decisions.length < 3) {
           article.tags.forEach(tag => {
             articleCompare.tags.forEach(tagCompare => {
-              if (tag.title === tagCompare.title) {
+              if (tag.title === tagCompare.title && !article.decisions.find(x => x.link === articleCompare.id)) {
                 article.decisions.push({
                   title: articleCompare.title,
                   link: articleCompare.id,
