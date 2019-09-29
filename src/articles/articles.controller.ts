@@ -16,9 +16,16 @@ export class ArticlesController {
     const articles = await this.articleService.findAll();
     return this.processorService.process(articles); // todo await?
   }
+  msleep(n): void {
+    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, n);
+  }
+  sleep(n): void {
+    this.msleep(n * 1000);
+  }
   @Get(':topic')
   async queryAll(@Param('topic') topic: string): Promise<Article[]> {
-    if (topic === 'Trump') {
+    if (topic.toLowerCase() === 'trump') {
+      this.sleep(4);
       return this.mockTrump();
     }
     // return await this.articleService.queryAll(topic);
@@ -50,7 +57,7 @@ export class ArticlesController {
         ],
         decisions: [
           {
-            title: 'The Fight Over California\'s Emissions Rules Just Got Real',
+            title: "The Fight Over California's Emissions Rules Just Got Real",
             link: '-803260838',
           },
           {
@@ -87,7 +94,7 @@ export class ArticlesController {
         decisions: [
           {
             title:
-              'Chrissy Teigen unpacks her viral feud with Trump on \'Ellen\'',
+              "Chrissy Teigen unpacks her viral feud with Trump on 'Ellen'",
             link: '773189522',
           },
           {
@@ -153,13 +160,13 @@ export class ArticlesController {
         source:
           'https://www.cnn.com/videos/politics/2019/08/30/cuomo-closing-argument-trump-supporters-lying-about-lying-vpx.cnn',
         summary:
-          'CNN\'s Chris Cuomo addresses the people within President Trump\'s inner circle who actively lie about the president lying.',
+          "CNN's Chris Cuomo addresses the people within President Trump's inner circle who actively lie about the president lying.",
         title: 'Cuomo revisits Trump supporters lying about Trump lying',
         image:
           'https://cdn.cnn.com/cnnnext/dam/assets/190829224738-cuomo-closing-argument-super-tease.jpg',
         date: new Date('2019-08-30T04:28:39.000Z'),
         text:
-          'Chat with us in Facebook Messenger. Find out what\'s happening in the world as it unfolds.',
+          "Chat with us in Facebook Messenger. Find out what's happening in the world as it unfolds.",
         tags: [],
         decisions: [],
         sentiment: null,
@@ -221,8 +228,8 @@ export class ArticlesController {
         source:
           'https://www.wired.com/story/fight-californias-emissions-rules-real/',
         summary:
-          'The Trump administration plans to revoke California\'s authority to set regulations for vehicle fuel economy and emissions, likely setting up a court fight.',
-        title: 'The Fight Over California\'s Emissions Rules Just Got Real',
+          "The Trump administration plans to revoke California's authority to set regulations for vehicle fuel economy and emissions, likely setting up a court fight.",
+        title: "The Fight Over California's Emissions Rules Just Got Real",
         image:
           'https://media.wired.com/photos/5d826d8856f23f000821a1ad/master/w_2560,c_limit/Transpo_CAemissions_1036646528.jpg',
         date: new Date('2019-09-18T20:42:48.000Z'),
@@ -282,7 +289,7 @@ export class ArticlesController {
           'https://cdn.cnn.com/cnnnext/dam/assets/190920110914-02-trump-oval-office-0920-super-tease.jpg',
         date: new Date('2019-09-20T15:59:34.000Z'),
         text:
-          'Chat with us in Facebook Messenger. Find out what\'s happening in the world as it unfolds.',
+          "Chat with us in Facebook Messenger. Find out what's happening in the world as it unfolds.",
         tags: [],
         decisions: [],
         sentiment: null,
@@ -342,7 +349,7 @@ export class ArticlesController {
             link: '1949753124',
           },
           {
-            title: 'The Fight Over California\'s Emissions Rules Just Got Real',
+            title: "The Fight Over California's Emissions Rules Just Got Real",
             link: '-803260838',
           },
           {
@@ -378,7 +385,7 @@ export class ArticlesController {
             link: '1949753124',
           },
           {
-            title: 'The Fight Over California\'s Emissions Rules Just Got Real',
+            title: "The Fight Over California's Emissions Rules Just Got Real",
             link: '-803260838',
           },
           {
@@ -400,7 +407,7 @@ export class ArticlesController {
           'https://cdn.cnn.com/cnnnext/dam/assets/190906170946-trump-magic-marker-super-tease.jpg',
         date: new Date('2019-09-06T21:13:27.000Z'),
         text:
-          'Chat with us in Facebook Messenger. Find out what\'s happening in the world as it unfolds.',
+          "Chat with us in Facebook Messenger. Find out what's happening in the world as it unfolds.",
         tags: [],
         decisions: [],
         sentiment: null,
@@ -427,13 +434,13 @@ export class ArticlesController {
         source:
           'https://www.cnn.com/videos/politics/2019/08/29/cuomo-kayleigh-mcenany-trump-campaign-press-secretary-president-doesnt-lie-cpt-vpx.cnn',
         summary:
-          'CNN\'s Chris Cuomo pressed Trump 2020 Campaign National Press Secretary Kayleigh McEnany when she claimed President Trump has never lied to Americans.',
+          "CNN's Chris Cuomo pressed Trump 2020 Campaign National Press Secretary Kayleigh McEnany when she claimed President Trump has never lied to Americans.",
         title: 'Cuomo to Trump press secretary: He lies and you know it',
         image:
           'https://cdn.cnn.com/cnnnext/dam/assets/190829023304-cuomo-kayleigh-trump-doesnt-lie-split-super-tease.jpg',
         date: new Date('2019-08-29T07:04:04.000Z'),
         text:
-          'Chat with us in Facebook Messenger. Find out what\'s happening in the world as it unfolds.',
+          "Chat with us in Facebook Messenger. Find out what's happening in the world as it unfolds.",
         tags: [],
         decisions: [],
         sentiment: null,
@@ -444,14 +451,14 @@ export class ArticlesController {
         source:
           'https://www.cnn.com/videos/politics/2019/09/26/pennsylvania-swing-voters-trump-marquez-pkg-newday-vpx.cnn',
         summary:
-          'Quakertown, Pennsylvania, voted for President Trump in 2016. CNN\'s Miguel Marquez talks with locals -- including Trump voters and Democratic voters -- about how they view the president now.',
+          "Quakertown, Pennsylvania, voted for President Trump in 2016. CNN's Miguel Marquez talks with locals -- including Trump voters and Democratic voters -- about how they view the president now.",
         title:
-          'Trump voter: I think he crossed a line, but that\'s the way he is',
+          "Trump voter: I think he crossed a line, but that's the way he is",
         image:
           'https://cdn.cnn.com/cnnnext/dam/assets/190926095530-miguel-marquez-talks-with-pennsylvania-voters-super-tease.jpg',
         date: new Date('2019-09-26T14:16:27.000Z'),
         text:
-          'Chat with us in Facebook Messenger. Find out what\'s happening in the world as it unfolds.',
+          "Chat with us in Facebook Messenger. Find out what's happening in the world as it unfolds.",
         tags: [],
         decisions: [],
         sentiment: null,
@@ -461,13 +468,13 @@ export class ArticlesController {
         author: 'Ellie Houghtaling',
         source: 'https://mashable.com/article/chrissy-teigen-trump-comeback/',
         summary:
-          'Chrissy Teigen sat down with Ellen DeGeneres to explain her recent Twitter feud with President Donald Trump. If you weren\'t tuned in at the close of the weekend, Trump lashed out against Teigen and her husband John Legend after Legend appeared in a segment wi…',
-        title: 'Chrissy Teigen unpacks her viral feud with Trump on \'Ellen\'',
+          "Chrissy Teigen sat down with Ellen DeGeneres to explain her recent Twitter feud with President Donald Trump. If you weren't tuned in at the close of the weekend, Trump lashed out against Teigen and her husband John Legend after Legend appeared in a segment wi…",
+        title: "Chrissy Teigen unpacks her viral feud with Trump on 'Ellen'",
         image:
           'https://mondrian.mashable.com/2019%252F09%252F11%252F06%252Ff978ba9e73134a0599b8833c6051848a.14c90.jpg%252F1200x630.jpg?signature=w1NH2Vxkxrnm0bQC_TSYOs3Bx4o=',
         date: new Date('2019-09-11T15:08:10.000Z'),
         text:
-          'Chrissy Teigen sat down with Ellen DeGeneres to explain her recent Twitter feud with President Donald Trump.\r\nIf you weren\'t tuned in at the close of the weekend, Trump lashed out against Teigen and her husband John Legend after Legend appeared in a segment w… [+1363 chars]',
+          "Chrissy Teigen sat down with Ellen DeGeneres to explain her recent Twitter feud with President Donald Trump.\r\nIf you weren't tuned in at the close of the weekend, Trump lashed out against Teigen and her husband John Legend after Legend appeared in a segment w… [+1363 chars]",
         tags: [
           { title: 'Chrissy Teigen', occurrence: 0.006785445630308473 },
           { title: 'Ellen DeGeneres', occurrence: 0.7546439939797962 },
@@ -488,7 +495,7 @@ export class ArticlesController {
             link: '-243287060',
           },
           {
-            title: 'The Fight Over California\'s Emissions Rules Just Got Real',
+            title: "The Fight Over California's Emissions Rules Just Got Real",
             link: '-803260838',
           },
         ],
@@ -555,7 +562,7 @@ export class ArticlesController {
             link: '-243287060',
           },
           {
-            title: 'The Fight Over California\'s Emissions Rules Just Got Real',
+            title: "The Fight Over California's Emissions Rules Just Got Real",
             link: '-803260838',
           },
         ],
