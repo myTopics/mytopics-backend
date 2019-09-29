@@ -15,7 +15,7 @@ export class GnewsService {
     });
   }
   async findByQuery(query: string): Promise<object> {
-    return this.newsapi.v2.topHeadlines({
+    return this.newsapi.v2.everything({
       language: 'en',
       q: query,
     });

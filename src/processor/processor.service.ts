@@ -34,7 +34,7 @@ export class ProcessorService {
           const result = JSON.parse(child.stdout);
           const tags = [];
           result.tags.forEach(tag => {
-            tags.push({ title: tag.title, occurrence: Math.random() });
+            tags.push({ title: tag.NAME, occurrence: Math.random() });
           });
           article.tags = tags;
           newArticles.push(article);
