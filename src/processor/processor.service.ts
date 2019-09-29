@@ -11,7 +11,7 @@ export class ProcessorService {
       if (article) {
         const input = JSON.stringify({
           id: article.id,
-          text: article.text.replace(/['"\r\n\\]+/g, ''),
+          text: article.text.replace(/[^ a-zA-Z0-9]+/g, ''),
         });
         console.log('input python:');
         console.dir(input);
