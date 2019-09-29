@@ -35,7 +35,7 @@ def get_tags(text_analytics, document):
         tag = dict()
         tag['NAME'] = entity.name
         tag['Type'] = entity.type
-        if tag['Type'] == u'DateTime' or tag['Type'] == u'Other':
+        if tag['Type'] == u'DateTime' or tag['Type'] == u'Other' or tag['Type'] == u'Quantity':
             continue
 
         tag['Sub-type'] = entity.sub_type
@@ -73,16 +73,23 @@ def main(documents):
     get_tags(text_analytics, documents)
     get_sentiment(text_analytics, documents)
     
-    print(json.dumps(document))
+    print json.dumps(document)
     sys.stdout.flush()
 
 if __name__ == "__main__":
     os.environ["TEXT_ANALYTICS_SUBSCRIPTION_KEY"] = '70cc9edd41284fbeae3d022a83353937'
     os.environ["TEXT_ANALYTICS_ENDPOINT"] = 'https://ilana.cognitiveservices.azure.com/'
-    document = json.loads('{"id":"1626045727","author":"Tovah Lazaroff","source":"https://www.jpost.com/Arab-Israeli-Conflict/IDF-disperses-Palestinian-protest-againt-Israeli-annexation-plans-603221","summary":"At one point during the demonstration, some of the activists went up to the roof and stood on the edge, waving Palestinian flags.","title":"IDF disperses Palestinian protest against Israeli annexation plans","image":"https://images.jpost.com/image/upload/f_auto,fl_lossy/t_Article2016_ControlFaceDetect/446180","date":"2019-09-28T22:26:00.000Z","text":"The IDF on Saturday dispersed a Palestinian protest against Israeli plans to annex the Jordan Valley and the Megilot region of the Dead Sea.\\r\\nvar cont = `Join Jerusalem Post Premium Plus now for just $5 and upgrade your experience with an ads-free website and… [+123 chars]","tags":null,"decisions":null,"sentiment":null}')
 
-    # if len(sys.argv) < 2:
-    #     print("article json is missing")
-    # else:
+    if len(sys.argv) < 2:
+        raise Exception ("article json is missing")
 
-    main(document)
+    else:
+        document = json.loads(sys.argv[1])
+    main([document])
+
+
+
+
+
+
+    
