@@ -1,4 +1,4 @@
 export interface Decision {
-    readonly title: string;
-    readonly link: string;
+    title: string;
+    link: string;
 }

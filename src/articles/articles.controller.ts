@@ -11,14 +11,14 @@ export class ArticlesController {
   ) {}
   @Get()
   async getAll(): Promise<Article[]> {
-    return await this.articleService.findAll();
-    // const articles = await this.articleService.findAll();
-    // return this.processorService.process(articles); // todo await?
+    // return await this.articleService.findAll();
+    const articles = await this.articleService.findAll();
+    return this.processorService.process(articles); // todo await?
   }
   @Get(':topic')
   async queryAll(@Param('topic')topic: string): Promise<Article[]> {
-    return await this.articleService.queryAll(topic);
-    // const articles = await this.articleService.queryAll(topic);
-    // return this.processorService.process(articles); // todo await?
+    // return await this.articleService.queryAll(topic);
+    const articles = await this.articleService.queryAll(topic);
+    return this.processorService.process(articles); // todo await?
   }
 }

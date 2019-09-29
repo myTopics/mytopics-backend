@@ -21,7 +21,7 @@ export class GnewsService {
     });
   }
   toArticle(article): Article {
-    if(!article.title) {
+    if (!article.title) {
       return null;
     }
     return {

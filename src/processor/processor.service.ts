@@ -41,6 +41,25 @@ export class ProcessorService {
         }
       }
     });
-    return newArticles;
+    return this.processDecisions(newArticles);
+  }
+  processDecisions(articles: Article[]): Article[] {
+    articles.forEach(article => {
+      articles.forEach(articleCompare => {
+        if (article !== articleCompare) {
+          article.tags.forEach(tag => {
+            articleCompare.tags.forEach(tagCompare => {
+              if (tag.title === tagCompare.title) {
+                article.decisions.push({
+                  title: articleCompare.title,
+                  link: articleCompare.id,
+                });
+              }
+            });
+          });
+        }
+      });
+    });
+    return articles;
   }
 }
