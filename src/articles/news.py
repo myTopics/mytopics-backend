@@ -73,7 +73,7 @@ def main(documents):
     get_tags(text_analytics, documents)
     get_sentiment(text_analytics, documents)
     
-    print json.dumps(document)
+    print(json.dumps(document))
     sys.stdout.flush()
 
 if __name__ == "__main__":

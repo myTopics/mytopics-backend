@@ -1,17 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { Article } from '../articles/interfaces/article.interface';
 import * as NewsAPI from 'newsapi';
-const newsapi = new NewsAPI('YOUR_API_KEY');
+import striptags = require('striptags');
 
 @Injectable()
 export class GnewsService {
-  id: number;
   newsapi: NewsAPI;
   constructor() {
     this.newsapi = new NewsAPI('fa67798007d44de282aafd702bdc4ce5');
   }
   async findAll(): Promise<object> {
-    this.id = 0; // TODO
     return this.newsapi.v2.topHeadlines({
       language: 'en',
     });
@@ -23,23 +21,22 @@ export class GnewsService {
     });
   }
   toArticle(article): Article {
-    const art = {
+    if(!article.title) {
+      return null;
+    }
+    return {
       id: this.getHashCode(article.title).toString(),
       author: article.author,
       source: article.url,
-      summary: article.description,
-      title: article.title,
+      summary: striptags(article.description),
+      title: striptags(article.title),
       image: article.urlToImage,
       date: new Date(article.publishedAt),
-      text: article.content,
+      text: striptags(article.content),
       tags: null,
       decisions: null,
       sentiment: null,
     };
-    if (art.id && art.title && art.text && art.summary) {
-      return art;
-    }
-    return null;
   }
   getHashCode(str: string): number {
     let hash = 0;

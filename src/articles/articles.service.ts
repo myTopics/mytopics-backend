@@ -10,7 +10,9 @@ export class ArticlesService {
     const json = await this.newsService.findAll();
     // tslint:disable-next-line:no-string-literal
     return json['articles'].map(article => {
+      console.dir(article);
       const art = this.newsService.toArticle(article);
+      console.dir(art);
       if (art) {
         return art;
       }
